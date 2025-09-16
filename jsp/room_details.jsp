@@ -28,21 +28,21 @@ try {
         double price = rs.getDouble("price_per_night");
         double subtotal = price * nights;
         double tax = subtotal * taxRate;
-        double total = subtotal + tax;
+            double total = subtotal + tax; // Calculate total including tax
 %>
     <div class="card">
         <h2><%= rs.getString("room_type") %></h2>
         <p><%= rs.getString("description") %></p>
-        <p>Price per night: $<%= price %></p>
+            <p>Price/Night: ₹<%= String.format("%.2f", price) %></p>
         <form method="get">
             <label>Nights: <input type="number" name="nights" value="<%= nights %>" min="1" /></label>
             <input type="hidden" name="room_id" value="<%= roomId %>" />
             <button class="button" type="submit">Recalculate</button>
         </form>
         <hr>
-        <p>Subtotal: $<%= subtotal %></p>
-        <p>Tax (12%): $<%= tax %></p>
-        <h3>Total: $<%= total %></h3>
+            <p>Subtotal: ₹<%= String.format("%.2f", subtotal) %></p>
+            <p>Tax (12%): ₹<%= String.format("%.2f", tax) %></p>
+            <h3>Total: ₹<%= String.format("%.2f", total) %></h3>
         <form action="booking_summary.jsp" method="post">
             <input type="hidden" name="room_id" value="<%= roomId %>" />
             <input type="hidden" name="nights" value="<%= nights %>" />
